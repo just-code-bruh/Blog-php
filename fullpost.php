@@ -33,10 +33,10 @@
                     <!--Main area -->
                     <?php
                     global $connection;
-                    if(isset($_GET["Search"])){
+                    if (isset($_GET["Search"])) {
                         $search = $_GET["searchbutton"];
                         $viewquery = "SELECT * FROM admin_panel WHERE DateTime LIKE '%$search%' OR title LIKE '%$search%' OR category LIKE '%$search%' OR post LIKE '%$search%'";
-                    }else{
+                    } else {
                         $postIdUrl = $_GET["id"];
                         $viewquery = "SELECT * FROM admin_panel WHERE id='$postIdUrl'";
                     }
@@ -45,7 +45,7 @@
                         printf("Error: %s\n", mysqli_error($connection));
                         exit();
                     }
-                    while($datarows=mysqli_fetch_array($execute)){
+                    while ($datarows = mysqli_fetch_array($execute)) {
                         $postid = $datarows['id'];
                         $datetime = $datarows['DateTime'];
                         $title = $datarows['title'];
@@ -53,27 +53,40 @@
                         $admin = $datarows['author'];
                         $post = $datarows['post'];
                         $image = $datarows['image'];
-                    ?>
-                    <div class="img-thumbnail" style="margin-top:15px; margin-bottom:15px;">
-                        <img class="responsive" src="./upload/<?php echo $image; ?>" alt="">
-                        <div class="caption">
-                            <h3><?php echo htmlentities($title); ?></h3>
-                            <p>Category: <?php echo htmlentities($category); ?> published on : <?php echo htmlentities($datetime); ?></p>
-                            <p>
-                                <?php 
-                                    echo $post;
-                                ?>
-                            </p>
+                        ?>
+                        <div class="img-thumbnail" style="margin-top:15px; margin-bottom:15px;">
+                            <img class="responsive" src="./upload/<?php echo $image; ?>" alt="">
+                            <div class="caption">
+                                <h3><?php echo htmlentities($title); ?></h3>
+                                <p>Category: <?php echo htmlentities($category); ?> published on : <?php echo htmlentities($datetime); ?></p>
+                                <p>
+                                    <?php
+                                        echo $post;
+                                        ?>
+                                </p>
+                            </div>
+                            <!-- <a href="fullpost.php?id=<?php echo $postid; ?>"><span class="btn btn-info">Read more &rsaquo;</span></a> -->
                         </div>
-                        <!-- <a href="fullpost.php?id=<?php echo $postid; ?>"><span class="btn btn-info">Read more &rsaquo;</span></a> -->
-                    </div>
                     <?php } ?>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis aliquid nobis impedit voluptatem? Quis dolorum atque dolorem veritatis laudantium veniam amet ipsam. Iure ea molestiae eveniet fugit suscipit? Amet, culpa?</p>
-                </div>
-                <div class="col-sm-3">
-                    <!--Side area -->
-                    <h2>Test</h2>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A sunt consequatur dolorum mollitia libero dolorem veniam omnis hic rem molestias, ex accusamus repudiandae, tempora ad. Laboriosam atque a voluptatem non!</p>
+                    <div>
+                        <form action="addNewPost.php" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="name"><span class="FieldInfo">Name</span></label>
+                                    <input class="form-control" type="text" name="name" id="name" placeholder="Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email"><span class="FieldInfo">Email</span></label>
+                                    <input class="form-control" type="text" name="email" id="email" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="commentarea"><span class="FieldInfo">Comment</span></label>
+                                    <textarea class="form-control" type="file" name="comment" id="post"></textarea>
+                                </div>
+                                <input class="btn btn-secondary" type="submit" name="submit" value="Add new post">
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
