@@ -65,7 +65,7 @@
                         $image = $datarows['image'];
                         ?>
                         <div class="img-thumbnail" style="margin-top:15px; margin-bottom:15px;">
-                            <img class="responsive" src="./upload/<?php echo $image; ?>" alt="">
+                            <img class="responsive" src="upload/<?php echo $image; ?>" alt="">
                             <div class="caption">
                                 <h3><?php echo htmlentities($title); ?></h3>
                                 <p>Category: <?php echo htmlentities($category); ?> published on : <?php echo htmlentities($datetime); ?></p>

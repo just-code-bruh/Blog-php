@@ -1,6 +1,32 @@
 <?php require_once("include/db.php"); ?>
 <?php require_once("include/session.php"); ?>
 <?php require_once("include/Functions.php"); ?>
+<?php
+if (isset($_POST["submit"])) {
+    $name = mysqli_real_escape_string($connection, $_POST["name"]);
+    $email = mysqli_real_escape_string($connection, $_POST["email"]);
+    $comment = mysqli_real_escape_string($connection, $_POST["comment"]);
+    $CurrentTime = time();
+    $DateTime = strftime("%B-%d-%y %H:%M:%S", $CurrentTime);
+    $DateTime;
+    $postid = $_GET["id"];
+    if (empty($name) || empty($email) || empty($comment)) {
+        echo $_SESSION["ErrorMessage"] = "All fields are required !";
+    } else {
+        global $connection;
+        $postIdUrl = $_GET['id'];
+        $query = "INSERT into comments (datetime, name, email, comment, status, admin_panel_id) VALUES ('$DateTime', '$name', '$email', '$comment', 'OFF', '$postIdUrl')";
+        $execute = mysqli_query($connection, $query);
+        if ($execute) {
+            echo $_SESSION["SuccessMessage"] = "Comment submitted successfully";
+            Redirect_to("fullpost.php?id={$postid}");
+        } else {
+            echo $_SESSION["ErrorMessage"] = "Operation failed";
+            Redirect_to("fullpost.php?id={$postid}");
+        }
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +57,9 @@
             <div class="row">
                 <div class="col-sm-8">
                     <!--Main area -->
+                    <?php echo message();
+                    echo SuccessMessage();
+                    ?>
                     <?php
                     global $connection;
                     if (isset($_GET["Search"])) {
@@ -55,7 +84,7 @@
                         $image = $datarows['image'];
                         ?>
                         <div class="img-thumbnail" style="margin-top:15px; margin-bottom:15px;">
-                            <img class="responsive" src="./upload/<?php echo $image; ?>" alt="">
+                            <img class="responsive" src="upload/<?php echo $image; ?>" alt="">
                             <div class="caption">
                                 <h3><?php echo htmlentities($title); ?></h3>
                                 <p>Category: <?php echo htmlentities($category); ?> published on : <?php echo htmlentities($datetime); ?></p>
@@ -69,7 +98,40 @@
                         </div>
                     <?php } ?>
                     <div>
-                        <form action="addNewPost.php" method="post" enctype="multipart/form-data">
+                        <h3>Comments</h3>
+                        <?php
+                        $connection;
+                        $postidComments = $_GET["id"];
+                        $queryComments = "SELECT * FROM comments WHERE admin_panel_id='$postidComments'";
+                        $execute = mysqli_query($connection, $queryComments);
+                        while ($datarows = mysqli_fetch_array($execute)) {
+                            $commentDate = $datarows['datetime'];
+                            $commentName = $datarows['name'];
+                            $comments = $datarows['comment'];
+
+                            ?>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="img-circle img-responsive">
+                                        <img style="margin-right:10px;" src="uploads/unknown-profile-1.jpg" width="70px" alt="">
+                                    </div>
+                                    <div>
+                                        <div class="mic-info">
+                                            By :<a href="#"><?php echo $commentName; ?></a> On : <?php echo $commentDate; ?>
+                                        </div>
+                                        <div class="comment-text">
+                                            <?php echo $comments; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <div>
+                        <h3>Add comment :</h3>
+                    </div>
+                    <div>
+                        <form action="fullpost.php?id=<?php echo $postid; ?>" method="post" enctype="multipart/form-data">
                             <fieldset>
                                 <div class="form-group">
                                     <label for="name"><span class="FieldInfo">Name</span></label>
@@ -83,7 +145,7 @@
                                     <label for="commentarea"><span class="FieldInfo">Comment</span></label>
                                     <textarea class="form-control" type="file" name="comment" id="post"></textarea>
                                 </div>
-                                <input class="btn btn-secondary" type="submit" name="submit" value="Add new post">
+                                <input class="btn btn-primary" type="submit" name="submit" value="Submit">
                             </fieldset>
                         </form>
                     </div>
