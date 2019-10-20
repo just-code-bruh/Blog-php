@@ -43,8 +43,20 @@ if (isset($_POST["submit"])) {
 </head>
 
 <body>
-    <nav class="navbar navbar-light" style="background:#8D82B4;">
-        <a class="navbar-brand">Navbar</a>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:cadetblue">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="blog.php">Blog<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.php">Dashboard</a>
+                </li>
+            </ul>
+        </div>
         <form class="form-inline" action="blog.php">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color:white; border-color:white;" name="searchbutton">Search</button>
@@ -84,7 +96,7 @@ if (isset($_POST["submit"])) {
                         $image = $datarows['image'];
                         ?>
                         <div class="img-thumbnail" style="margin-top:15px; margin-bottom:15px;">
-                            <img class="responsive" src="upload/<?php echo $image; ?>" alt="">
+                            <img class="responsive" src="uploads/<?php echo $image; ?>" alt="">
                             <div class="caption">
                                 <h3><?php echo htmlentities($title); ?></h3>
                                 <p>Category: <?php echo htmlentities($category); ?> published on : <?php echo htmlentities($datetime); ?></p>
