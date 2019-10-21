@@ -17,3 +17,42 @@
     background: #1c1c1c;
     color: #fff;
 }
+
+.wall-item:hover{
+    transform: translateY(-6px);
+    transition: all 200ms;
+}
+
+.wall-column {
+    display: block;
+    position: relative;
+    width: 33.3333%;
+    float: left;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+
+.lmoussiba{
+    position: relative;
+    left: 978px;
+}
+
+@media (max-width:640px){
+    .wall-column{
+        width: 50%;
+    }
+    .lmoussiba{
+        left:378px;
+    }
+}
+
+@media (max-width:480px) {
+    .wall-column {
+        width: auto;
+        float: none;
+    }
+
+    .lmoussiba {
+        left: 316px;
+    }
+}
