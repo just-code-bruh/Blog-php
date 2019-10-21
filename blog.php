@@ -13,13 +13,6 @@
     <!-- <script src="./js/jquery-3.2.1.min.js"></script> -->
     <!-- <script src="./js/bootstrap.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="./js/jaliswall.js"></script>
-    <script type="text/javascript">
-        $('.wall').jaliswall({
-            item: '.wall-item',
-            columnClass: '.wall-column'
-        });
-    </script>
     <link rel="stylesheet" href="./css/publicstyle.css">
     <title>Document</title>
 </head>
@@ -93,6 +86,13 @@
             <!-- </div> -->
         <!-- </div> -->
     </div>
+    <script src="./js/jaliswall.js"></script>
+    <script type="text/javascript">
+        $('.wall').jaliswall({
+            item: '.wall-item',
+            columnClass: '.wall-column'
+        });
+    </script>
 </body>
 
 </html>
