@@ -32,58 +32,58 @@
                 </li>
             </ul>
         </div>
-        <form class="form-inline" action="blog.php">
+        <!-- <form class="form-inline" action="blog.php">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color:white; border-color:white;" name="searchbutton">Search</button>
-        </form>
+        </form> -->
     </nav>
     <div class="container">
         <!-- <div class="blog-header"> -->
-            <h1 style="text-align:center; color:#fff; margin:60px auto; font-size:40px; font-weight:400;">Complete CMS blog</h1>
-            <!-- <div class="row"> -->
-            <div class="wall">
-                <!--Main area -->
-                <?php
-                global $connection;
-                if (isset($_GET["Search"])) {
-                    $search = $_GET["searchbutton"];
-                    $viewquery = "SELECT * FROM admin_panel WHERE DateTime LIKE '%$search%' OR title LIKE '%$search%' OR category LIKE '%$search%' OR post LIKE '%$search%';";
-                } else {
-                    $viewquery = "SELECT * FROM admin_panel ORDER BY dateTime DESC;";
-                }
-                $execute = mysqli_query($connection, $viewquery);
-                if (!$execute) {
-                    printf("Error: %s\n", mysqli_error($connection));
-                    exit();
-                }
-                while ($datarows = mysqli_fetch_array($execute)) {
-                    $postid = $datarows['id'];
-                    $datetime = $datarows['DateTime'];
-                    $title = $datarows['title'];
-                    $category = $datarows['category'];
-                    $admin = $datarows['author'];
-                    $post = $datarows['post'];
-                    $image = $datarows['image'];
-                    ?>
-                    <div class="wall-item" style="display:block; margin:0 0 24px 0; padding:12px; background:#1e1e1e; transition:all 200ms;">
-                        <img style="display:block; width:100%; margin:0 0 30px 0;" src="uploads/<?php echo $image; ?>" alt="">
-                        <!-- <div class="caption"> -->
-                        <h3 style="text-align:center; color:#fff; fint-size:14px; text-transform:uppercase; margin-bottom:0; padding-bottom:0;"><?php echo htmlentities($title); ?></h3>
-                        <p style="text-align:center; color:grey; font-weight:300; margin-top:10px;">Category: <?php echo htmlentities($category); ?> published on : <?php echo htmlentities($datetime); ?></p>
-                        <p style="text-align:center; color:grey; font-weight:300; margin-top:10px;">
-                            <?php
-                                if (strlen($post > 30)) {
-                                    $post = substr($post, 0, 30) . '...';
-                                }
-                                echo $post;
-                                ?>
-                        </p>
-                        <!-- </div> -->
-                        <a class="lmoussiba" href="fullpost.php?id=<?php echo $postid; ?>"><span class="btn btn-info">Read more &rsaquo;</span></a>
-                    </div>
-                <?php } ?>
-            </div>
-            <!-- </div> -->
+        <h1 style="text-align:center; color:#fff; margin:60px auto; font-size:40px; font-weight:400;">Complete CMS blog</h1>
+        <!-- <div class="row"> -->
+        <div class="wall">
+            <!--Main area -->
+            <?php
+            global $connection;
+            if (isset($_GET["Search"])) {
+                $search = $_GET["searchbutton"];
+                $viewquery = "SELECT * FROM admin_panel WHERE DateTime LIKE '%$search%' OR title LIKE '%$search%' OR category LIKE '%$search%' OR post LIKE '%$search%';";
+            } else {
+                $viewquery = "SELECT * FROM admin_panel ORDER BY dateTime DESC;";
+            }
+            $execute = mysqli_query($connection, $viewquery);
+            if (!$execute) {
+                printf("Error: %s\n", mysqli_error($connection));
+                exit();
+            }
+            while ($datarows = mysqli_fetch_array($execute)) {
+                $postid = $datarows['id'];
+                $datetime = $datarows['DateTime'];
+                $title = $datarows['title'];
+                $category = $datarows['category'];
+                $admin = $datarows['author'];
+                $post = $datarows['post'];
+                $image = $datarows['image'];
+                ?>
+                <div class="wall-item" style="display:block; margin-bottom:20px; padding:12px; background:#403f3f; transition:all 200ms;">
+                    <img style="display:block; width:100%; margin:0 0 30px 0;" src="uploads/<?php echo $image; ?>" alt="">
+                    <!-- <div class="caption"> -->
+                    <h3 style="text-align:center; color:#fff; fint-size:14px; text-transform:uppercase; margin-bottom:0; padding-bottom:0;"><?php echo htmlentities($title); ?></h3>
+                    <p style="text-align:center; color:grey; font-weight:300; margin-top:10px;">Category: <?php echo htmlentities($category); ?> published on : <?php echo htmlentities($datetime); ?></p>
+                    <p style="text-align:center; color:grey; font-weight:300; margin-top:10px;">
+                        <?php
+                            if (strlen($post > 30)) {
+                                $post = substr($post, 0, 30) . '...';
+                            }
+                            echo $post;
+                            ?>
+                    </p>
+                    <!-- </div> -->
+                    <a class="batn" href="fullpost.php?id=<?php echo $postid; ?>"><span class="btn btn-info">Read more &rsaquo;</span></a>
+                </div>
+            <?php } ?>
+        </div>
+        <!-- </div> -->
         <!-- </div> -->
     </div>
     <script src="./js/jaliswall.js"></script>

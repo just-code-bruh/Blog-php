@@ -27,8 +27,6 @@
                     <li class="nav-item"><a class="nav-link active" href="dashboard.php">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="addNewPost.php">Add new post</a></li>
                     <li class="nav-item"><a class="nav-link" href="categories.php">Categories</a></li>
-                    <li class="nav-item"><a class="nav-link" href="manage.php">Manage admins</a></li>
-                    <li class="nav-item"><a class="nav-link" href="comments.php">Comments</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="logout.php">Log out</a></li>
                 </ul>
@@ -80,7 +78,7 @@
                                 <td><?php echo $title ?></td>
                                 <td><?php echo $category ?></td>
                                 <td><?php echo $author ?></td>
-                                <td><img src="./upload/<?php echo $image ?>"></td>
+                                <td><img style="width:60px;" src="./uploads/<?php echo $image ?>"></td>
                                 <td>Processing</td>
                                 <td>
                                     <a href="editpost.php?edit=<?php echo $id ?>"><span class="btn btn-info">Edit</span></a> /

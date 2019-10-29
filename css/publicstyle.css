@@ -18,8 +18,13 @@
     color: #fff;
 }
 
+.wall-item{
+    background-color: #403f3f;
+    margin-bottom: 15px;
+}
+
 .wall-item:hover{
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     transition: all 200ms;
 }
 
@@ -35,6 +40,11 @@
 .lmoussiba{
     position: relative;
     left: 978px;
+}
+
+.batn{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @media (max-width:640px){

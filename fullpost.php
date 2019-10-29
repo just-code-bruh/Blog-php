@@ -65,10 +65,10 @@ if (isset($_POST["submit"])) {
                 </li>
             </ul>
         </div>
-        <form class="form-inline" action="blog.php">
+        <!-- <form class="form-inline" action="blog.php">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color:white; border-color:white;" name="searchbutton">Search</button>
-        </form>
+        </form> -->
     </nav>
 
     <div class="container">
